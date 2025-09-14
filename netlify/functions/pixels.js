@@ -1,9 +1,10 @@
 const axios = require('axios');
 const fs = require('fs');
+const path = require('path');
 const { PNG } = require('pngjs');
 
 const storage = {};
-fs.readdirSync('json/').forEach((fileName) => {
+fs.readdirSync(path.join(__dirname, 'json')).forEach((fileName) => {
   storage[fileName.split('.').shift()] = JSON.parse(
     fs.readFileSync(`json/${fileName}`, { encoding: 'utf-8' })
   );
