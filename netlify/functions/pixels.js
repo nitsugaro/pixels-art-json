@@ -1,14 +1,14 @@
 const axios = require('axios');
-const fs = require('fs');
-const path = require('path');
 const { PNG } = require('pngjs');
+const macriBoca = require('./json/macri-boca.json');
+const macriBocaPar = require('./json/macri-boca-par.json');
+const macriBocaImpar = require('./json/macri-boca-impar.json');
 
-const storage = {};
-fs.readdirSync(path.join(__dirname, 'json')).forEach((fileName) => {
-  storage[fileName.split('.').shift()] = JSON.parse(
-    fs.readFileSync(`json/${fileName}`, { encoding: 'utf-8' })
-  );
-});
+const storage = {
+  'macri-boca': macriBoca,
+  'macri-boca-par': macriBocaPar,
+  'macri-boca-impar': macriBocaImpar,
+};
 
 exports.handler = async function (event, context) {
   try {
