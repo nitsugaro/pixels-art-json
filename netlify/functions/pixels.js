@@ -1,9 +1,16 @@
 const axios = require('axios');
+const fs = require('fs');
 const { PNG } = require('pngjs');
+
+const storage = {};
+fs.readdirSync('json/').forEach((fileName) => {
+  storage[fileName.split('.').shift()] = JSON.parse(
+    fs.readFileSync(`json/${fileName}`, { encoding: 'utf-8' })
+  );
+});
 
 exports.handler = async function (event, context) {
   try {
-    // Query params desde event.queryStringParameters
     const query = event.queryStringParameters || {};
     const startX = parseInt(query.startX || '0', 10);
     const startY = parseInt(query.startY || '0', 10);
@@ -12,10 +19,7 @@ exports.handler = async function (event, context) {
     let colors;
     let coords;
     if (image) {
-      // Descargar JSON desde GitHub
-      const { data: draw } = await axios.get(
-        `https://raw.githubusercontent.com/nitsugaro/pixels-art-json/refs/heads/main/${image}.json`
-      );
+      const draw = storage[image];
       colors = draw.colors;
       coords = draw.coords;
     } else {
