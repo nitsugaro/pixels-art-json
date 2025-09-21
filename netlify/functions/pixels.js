@@ -4,6 +4,7 @@ const macriBoca = require('./json/macri-boca.json');
 
 const storage = {
   'macri-boca': macriBoca,
+  'bob-ssj': require('./json/bob-ssj.json'),
 };
 
 exports.handler = async function (event, context) {
