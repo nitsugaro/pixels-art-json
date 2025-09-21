@@ -1,10 +1,11 @@
 const axios = require('axios');
 const { PNG } = require('pngjs');
+const bobSsj = require('./json/bob-ssj.json');
 const macriBoca = require('./json/macri-boca.json');
 
 const storage = {
   'macri-boca': macriBoca,
-  'bob-ssj': require('./json/bob-ssj.json'),
+  'bob-ssj': bobSsj,
 };
 
 exports.handler = async function (event, context) {
